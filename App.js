@@ -1,34 +1,3 @@
-// const api_url =
-//       "https://isro.vercel.app/api/centres";
-
-// async function get_ISRO_data(url) {
-
-//     const response = await fetch(url);
-
-//     var data = await response.json();
-//     console.log(data);
-// }
-// get_ISRO_data(api_url);
-// const getData = async (url) => {
-//     const response = await fetch(url)
-//     const json = await response.json()
-//     return json
-//   }
-
-// var updatedIsroData = [];
-// const url = `https://isro.vercel.app/api/centres`
-// async function getIsroData(url){
-//   try {
-//     const data = await getData(url)
-//     if(centres === true)
-//      var dsg = updatedIsroData.find(item => item.place === 'Ahmedabad');
-//        console.log(updatedIsroData)
-
-//   } catch (error) {
-//     console.log(error.message)
-//   }
-// }
-// getIsroData(url);
 
 const centerBtn = document.getElementById("center");
 const stateBtn = document.getElementById("state");
@@ -61,37 +30,6 @@ async function fetch_ISRO_data() {
 fetch_ISRO_data(centresArr);
 
 // console.log("centreArr", centresArr);
-
-// function render_ISRO_data(centresArr) {
-//   //   console.log(centres)
-//   result_table.innerHTML = "";
-
-//   centresArr.map((centre) => {
-//     const { name, Place, State } = centre;
-
-//     let table = document.createElement("table");
-
-//     table.className = "card_container";
-
-//     table.innerHTML += `
-//       <thead class="table-header">
-//         <tr class="table-header-row">
-//             <th>CENTER</th>
-//             <th>CITY</th>
-//             <th>STATE</th>
-//         </tr>
-//        </thead>
-//        <tbody class="table-body">
-//         <tr class="table-body-row">
-//             <td class="table-body-cell center">${name}</td>
-//             <td class="table-body-cell city">${Place}</td>
-//             <td class="table-body-cell state">${State}</td>
-//         </tr>
-//        </tbody>
-//        `;
-//     result_table.appendChild(table);
-//   });
-// }
 
 function render_ISRO_data(centresArr) {
     //   console.log(centres)
@@ -194,7 +132,14 @@ searchBtn.addEventListener("click", (e) => {
   console.log(key);
   let arr = centresArr.filter((center) => center[key].toLowerCase() == search);
   console.log(arr);
-  render_ISRO_data(arr);
+  if(arr.length==0) {
+    result_table.innerHTML = `
+    <p class="result-not-found">result not found!</p>`
+  }
+  else{
+    console.log(arr);
+    render_ISRO_data(arr);
+  }
 });
 
 search_input.addEventListener("keyup", (e) => {
@@ -216,6 +161,13 @@ search_input.addEventListener("keyup", (e) => {
     return center[key].toLowerCase().includes(search);
   });
   console.log(arr);
-  render_ISRO_data(arr);
+  if(arr.length == 0) {
+    result_table.innerHTML = `
+    <p class="result-not-found">result not found!</p>`
+  }
+  else {
+    console.log(arr);
+    render_ISRO_data(arr);
+  }
 });
 
